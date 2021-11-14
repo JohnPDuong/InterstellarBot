@@ -1,6 +1,10 @@
-const Discord = require('discord.js');
+const { Client, Intents } = require('discord.js');
 
-const client = new Discord.Client({ intents: [] });
+const client = new Client({ intents: [
+    Intents.FLAGS.DIRECT_MESSAGES,
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES
+] });
 
 const prefix = '-';
 
@@ -8,10 +12,11 @@ require('dotenv').config();
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    client.user.setActivity('Running tests...', {type: "PLAYING"});
 });
 
-client.on('message', message => {
-    /*if (!message.content.startsWith(prefix)) message.channel.send('I GOT IT!');
+client.on('messageCreate', (message) => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ + /);
     const command = args.shift().toLowerCase();
@@ -21,10 +26,6 @@ client.on('message', message => {
     }
     else {
         message.channel.send('Command not recognized.');
-    }*/
-
-    if (message.content === "ping") {
-        message.reply("pong");
     }
 });
 
