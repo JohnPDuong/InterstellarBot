@@ -4,8 +4,7 @@ const client = new Discord.Client({ intents: [
     'GUILDS',
     'DIRECT_MESSAGES',
     'GUILD_MESSAGES'
-]
-});
+]});
 
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();

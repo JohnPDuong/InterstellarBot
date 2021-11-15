@@ -1,7 +1,7 @@
 module.exports = {
     name: 'daddychill',
-    description: 'Use when people are angry, grr',
+    description: 'Use when people are angy wangy',
     execute(client, message, args, Discord){
-        message.channel.send("Daddy please chill >~<");
+        message.channel.send("Daddy please chill :sob:");
     }
 }
