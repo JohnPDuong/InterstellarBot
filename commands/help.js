@@ -1,6 +1,6 @@
 module.exports = {
     name: 'help',
-    description: 'Display all messages',
+    description: 'Display all commands',
     execute(client, message, args, Discord){
         retVal = "This is a list of all commands: \n";
 
