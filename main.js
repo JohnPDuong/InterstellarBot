@@ -14,6 +14,7 @@ const { createAudioPlayer } = require('@discordjs/voice');
 
 client.commands = new Collection();
 client.events = new Collection();
+
 client.player = new createAudioPlayer();
 
 // client.distube = new DisTube(client, {
