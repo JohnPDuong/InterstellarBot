@@ -1,4 +1,10 @@
-module.exports = (Discord, client, message) => {
+module.exports = async (Discord, client, message) => {
+    console.log('Something received')
+    
+    if (!message.isCommand()) return;
+
+    console.log('Is interaciton')
+
     const prefix = '-';
 
     if(!message.content.startsWith(prefix) || message.author.bot) return;

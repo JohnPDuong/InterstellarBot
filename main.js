@@ -1,24 +1,30 @@
 const Discord = require('discord.js');
 
-const client = new Discord.Client({ intents: [
+const { Client, Collection } = require('discord.js');
+const client = new Client({ intents: [
     'GUILDS',
     'DIRECT_MESSAGES',
     'GUILD_MESSAGES',
     'GUILD_VOICE_STATES',
 ]});
+module.exports = client;
 
-const {
-	createAudioPlayer,
-} = require('@discordjs/voice');
+const { createAudioPlayer } = require('@discordjs/voice');
+// const { DisTube } = require('distube');
 
-client.commands = new Discord.Collection();
-client.events = new Discord.Collection();
+client.commands = new Collection();
+client.events = new Collection();
 client.player = new createAudioPlayer();
 
-['command_handler', 'event_handler'].forEach(handler => {
+// client.distube = new DisTube(client, {
+//     leaveOnFinish: true,
+//     emitNewSongOnly: true,
+//     emitAddSongWhenCreatingQueue: true,
+// });
+
+['Commands', 'Events'].forEach(handler => {
     require(`./handlers/${handler}`)(client, Discord);
 });
 
 require('dotenv').config();
-
 client.login(process.env.token);

@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 const {
     joinVoiceChannel,
 	createAudioResource,
@@ -7,17 +9,21 @@ const {
 module.exports = {
     name: 'radio',
     description: 'Vibe out',
-    async execute(client, message, args, Discord){
-        const channel = message.member?.voice.channel;
+    async execute(client, interaction){
+        const channel = interaction.member?.voice.channel;
 
-        console.log(channel.id);
+        if (!channel) return interaction.channel.send('You need to be in a channel to execute this command!');
 
-        if (!channel) return message.channel.send('You need to be in a channel to execute this command!');
+        const response = new MessageEmbed()
+        .setColor('ORANGE')
+        .setDescription(`Playing music! :musical_note:`);
+
+        interaction.followUp({embeds: [response]});
 
         client.connection = new joinVoiceChannel({
             channelId: channel.id,
-            guildId: message.guild.id,
-            adapterCreator: message.guild.voiceAdapterCreator
+            guildId: interaction.guild.id,
+            adapterCreator: interaction.guild.voiceAdapterCreator
         });
 
         client.connection.subscribe(client.player);
@@ -28,12 +34,8 @@ module.exports = {
             inlineVolume: true,
         });
 
-        resource.volume.setVolume(0.2);
-
-        await new Promise(res => setTimeout(() => res(2), 500));
+        resource.volume.setVolume(0.01);
 
         client.player.play(resource);
-
-        message.channel.send('Playing music!')
     }
 }
