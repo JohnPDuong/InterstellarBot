@@ -1,4 +1,5 @@
 const fs = require('fs');
+require('dotenv').config();
 
 module.exports = (client) => {
     const command_folders = fs.readdirSync('./commands/');
@@ -19,7 +20,7 @@ module.exports = (client) => {
     }
 
     client.on('ready', () => {
-        client.guilds.cache.get('828680113167925269').commands.set(commands_arry);
+        client.guilds.cache.get(process.env.guild).commands.set(commands_arry);
     });
 
     console.log('Done loading commands.\n');

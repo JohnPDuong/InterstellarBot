@@ -6,6 +6,7 @@ const client = new Client({ intents: [
     'DIRECT_MESSAGES',
     'GUILD_MESSAGES',
     'GUILD_VOICE_STATES',
+    'GUILD_MEMBERS',
 ]});
 module.exports = client;
 
