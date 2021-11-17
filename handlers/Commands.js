@@ -19,7 +19,7 @@ module.exports = (client) => {
     }
 
     client.on('ready', () => {
-        client.guilds.cache.get('410299898576109578').commands.set(commands_arry);
+        client.guilds.cache.get('828680113167925269').commands.set(commands_arry);
     });
 
     console.log('Done loading commands.\n');
